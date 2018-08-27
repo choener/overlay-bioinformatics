@@ -4,9 +4,9 @@ self: super: {
 
 hmmer = self.callPackage ./hmmer {};
 infernal = self.callPackage ./infernal {};
-viennarna = self.callPackage ./viennarna {};
 locarna = self.callPackage ./locarna {};
 rnasnp = self.callPackage ./rnasnp {};
+viennarna = self.callPackage ./viennarna {};
 
 #ncbiblast = self.callPackage ./pkgs/ncbi-blast {};
 #ncbi-sratools = self.callPackage ./pkgs/ncbi-sratools {};
