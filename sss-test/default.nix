@@ -2,6 +2,9 @@
 
 # docker load --input $(nix-build -E 'with import <nixpkgs> {}; pkgs.dockerTools.buildImage { name = "nix-SSS-test"; contents = pkgs.SSS-test; config = { Cmd = [ "/bin/SSS-test" ]; }; }')
 
+# run the thing:
+# docker run -i -t nix-sss-test:<cryptic-id> <optional /bin/SSS-test or /bin/SSS-local default to SSS-test>
+
 # https://github.com/NixOS/nixpkgs/blob/master/pkgs/build-support/docker/examples.nix
 
 stdenv.mkDerivation rec {
