@@ -20,15 +20,22 @@ stdenv.mkDerivation rec {
 
   replaceSSS = ./SSS.sh;
   replaceLocal = ./local.sh;
+  nixbundle = ./nix-bundle.sh;
 
   perl5lib = "${lib.makePerlPath [ perlPackages.StatisticsR perlPackages.BioPerl perlPackages.RegexpCommon perlPackages.IPCRun ]}";
-  prefixpath = "${lib.makeBinPath [ coreutils gnugrep gnused perl R rnasnp viennarna muscle gawk ]}";
+  prefixpath = "${lib.makeBinPath [ coreutils gnugrep gnused perl rnasnp viennarna muscle R gawk ]}";
 
   installPhase = ''
     mkdir -p $out $out/bin $out/shell
     cp -r scripts $out/
     cp -r $replaceSSS   $out/shell/SSS.sh
     cp -r $replaceLocal $out/shell/local.sh
+    cp $nixbundle $out/shell/SSS-test-nix-bundle.sh
+    substituteInPlace $out/shell/SSS-test-nix-bundle.sh \
+      --replace SSS-test $out/shell/SSS.sh
+    makeWrapper $out/shell/SSS-test-nix-bundle.sh   $out/bin/SSS-test-nix-bundle \
+      --prefix PATH : "$prefixpath" \
+      --prefix PERL5LIB : "$perl5lib"
     substituteInPlace $out/shell/SSS.sh \
       --replace "../scripts" $out/scripts \
       --replace "relplot.pl" ${viennarna}/share/ViennaRNA/bin/relplot.pl

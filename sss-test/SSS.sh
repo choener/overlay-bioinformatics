@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 
 script_dir="../scripts"
 
@@ -47,11 +47,12 @@ done
 if [[ $input =~ "-" ]]; then
 	echo "Input file must be in specific format, and can not contain '-'";
 	echo "Example allowed names: 'input.fa', 'input.alg', 'input_100.fa', 'input_100.alg'";
+	echo "$input is disallowed";
 	exit
 fi
 
 if [[ ! -s $input ]]; then
-	echo "SSS It was not possible to open file $1"
+	echo "SSS It was not possible to open file $input"
 	exit
 fi
 
