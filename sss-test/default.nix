@@ -1,4 +1,4 @@
-{ coreutils, gnugrep, gnused, stdenv, buildEnv, lib, makeWrapper, fetchurl, perl, perlPackages, rnasnp, viennarna, muscle, R }:
+{ coreutils, gnugrep, gnused, stdenv, buildEnv, lib, makeWrapper, fetchurl, perl, perlPackages, rnasnp, viennarna, muscle, R, gawk, bash }:
 
 # docker load --input $(nix-build -E 'with import <nixpkgs> {}; pkgs.dockerTools.buildImage { name = "nix-SSS-test"; contents = pkgs.SSS-test; config = { Cmd = [ "/bin/SSS-test" ]; }; }')
 
@@ -22,7 +22,7 @@ stdenv.mkDerivation rec {
   replaceLocal = ./local.sh;
 
   perl5lib = "${lib.makePerlPath [ perlPackages.StatisticsR perlPackages.BioPerl perlPackages.RegexpCommon perlPackages.IPCRun ]}";
-  prefixpath = "${lib.makeBinPath [ coreutils gnugrep gnused perl R rnasnp viennarna muscle ]}";
+  prefixpath = "${lib.makeBinPath [ coreutils gnugrep gnused perl R rnasnp viennarna muscle gawk ]}";
 
   installPhase = ''
     mkdir -p $out $out/bin $out/shell
@@ -34,8 +34,14 @@ stdenv.mkDerivation rec {
       --replace "relplot.pl" ${viennarna}/share/ViennaRNA/bin/relplot.pl
     substituteInPlace $out/shell/local.sh \
       --replace "../scripts" $out/scripts
-    makeWrapper $out/shell/SSS.sh   $out/bin/SSS-test  --prefix PATH : "$prefixpath" --prefix PERL5LIB : "$perl5lib"
-    makeWrapper $out/shell/local.sh $out/bin/SSS-local --prefix PATH : "$prefixpath" --prefix PERL5LIB : "$perl5lib"
+    makeWrapper $out/shell/SSS.sh   $out/bin/SSS-test \
+      --prefix PATH : "$prefixpath" \
+      --prefix PERL5LIB : "$perl5lib" \
+      --set RNASNPPATH ${rnasnp}
+    makeWrapper $out/shell/local.sh $out/bin/SSS-local \
+      --prefix PATH : "$prefixpath" \
+      --prefix PERL5LIB : "$perl5lib"
+    makeWrapper ${bash}/bin/bash $out/bin/bash
   '';
 
   buildInputs = [ makeWrapper ];
