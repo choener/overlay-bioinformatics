@@ -17,4 +17,8 @@ viennarna = self.callPackage ./viennarna {};
 ncbiblast-bin = self.callPackage ./ncbiblast-bin {};
 ncbi-sratools-bin = self.callPackage ./ncbi-sratools-bin {};
 
+# own tools
+
+sss-test = self.callPackage ./sss-test {};
+
 }
