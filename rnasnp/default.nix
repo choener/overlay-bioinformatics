@@ -1,4 +1,4 @@
-{ stdenv, fetchurl, perl }:
+{ stdenv, fetchurl, perl, makeWrapper }:
 # python2, python3  # requires non-standard path, will check later
 
 stdenv.mkDerivation rec {
@@ -11,8 +11,16 @@ stdenv.mkDerivation rec {
   };
 
   nativeBuildInputs = [ ]; # perl python2 python3 ];
+  buildInputs = [ makeWrapper ];
 
   enableParallelBuilding = true;
+
+  postInstall = ''
+    cp -r lib/distParam $out/lib
+    mv $out/bin/RNAsnp $out/bin/RNAsnp-exe
+    makeWrapper $out/bin/RNAsnp-exe $out/bin/RNAsnp \
+      --set RNASNPPATH $out
+  '';
 
   meta = {
     description = "Efficient detection of local RNA secondary structure changes induced by SNPs";
