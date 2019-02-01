@@ -1,12 +1,12 @@
 { stdenv, fetchurl }:
 
 stdenv.mkDerivation rec {
-  version = "3.1b2";
+  version = "3.2.1";
   name = "hmmer-${version}";
 
   src = fetchurl {
     url = "http://eddylab.org/software/hmmer3/${version}/hmmer-${version}.tar.gz";
-    sha256 = "dd16edf4385c1df072c9e2f58c16ee1872d855a018a2ee6894205277017b5536";
+    sha256 = "a56129f9d786ec25265774519fc4e736bbc16e4076946dcbd7f2c16efc8e2b9c";
   };
 
   enableParallelBuilding = true;
