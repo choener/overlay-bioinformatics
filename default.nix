@@ -7,6 +7,7 @@ infernal = self.callPackage ./infernal {};
 locarna = self.callPackage ./locarna {};
 rnasnp = self.callPackage ./rnasnp {};
 viennarna = self.callPackage ./viennarna {};
+dotcoder = self.callPackage ./dotcoder {};
 
 #ncbiblast = self.callPackage ./pkgs/ncbi-blast {};
 #ncbi-sratools = self.callPackage ./pkgs/ncbi-sratools {};

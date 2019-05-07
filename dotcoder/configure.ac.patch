@@ -1,0 +1,12 @@
+diff --git a/configure.ac b/configure.ac
+index 157385f..ec77536 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -25,6 +25,7 @@ AC_ARG_WITH([vienna-rna], AS_HELP_STRING([--with-vienna-rna(=PATH)], [support Vi
+   if test "$with_vienna_rna" != "yes" && test "$with_vienna_rna" != "no" ; then
+      CPPFLAGS="-I${with_vienna_rna}/include $CPPFLAGS"
+      LDFLAGS="-L${with_vienna_rna}/lib $LDFLAGS"
++     LIBS="-lRNA $LIBS"
+   fi
+ )
+ AC_CHECK_LIB([RNA], [pf_fold], [],
