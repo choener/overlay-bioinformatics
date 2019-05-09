@@ -1,4 +1,11 @@
-self: super: {
+# the usage of the "envAssembly" environment assumes that "<unstable>" is
+# available as a channel
+
+let
+  unstable = import <unstable> {};
+in
+
+self: super: rec {
 
 # this software is built from source
 
@@ -21,5 +28,37 @@ ncbi-sratools-bin = self.callPackage ./ncbi-sratools-bin {};
 # own tools
 
 sss-test = self.callPackage ./sss-test {};
+
+# environments
+
+# transeq: translate nucleotide to protein
+envGenome = super.pkgs.buildEnv {
+  name = "env-genome";
+  paths = with self; [
+    emboss
+    hmmer
+    infernal
+    ncbiblast-bin
+    ncbi-sratools-bin
+  ];
+};
+# RNA secondary structure
+envRNAstructure = super.pkgs.buildEnv {
+  name = "env-rna-structure";
+  paths = with self; [
+    dotcoder
+    locarna
+    rnasnp
+    sss-test
+    viennarna
+  ];
+};
+# genome assembly tools
+envAssembly = super.pkgs.buildEnv {
+  name = "env-assembly";
+  paths = with self; [
+    unstable.minimap2
+  ];
+};
 
 }
