@@ -24,6 +24,7 @@ dotcoder = self.callPackage ./dotcoder {};
 
 ncbiblast-bin = self.callPackage ./ncbiblast-bin {};
 ncbi-sratools-bin = self.callPackage ./ncbi-sratools-bin {};
+cmcompare-bin = self.callPackage ./cmcompare-bin {};
 
 # own tools
 
@@ -39,7 +40,8 @@ envGenome = super.pkgs.buildEnv {
     hmmer
     infernal
     ncbiblast-bin
-    ncbi-sratools-bin
+#    ncbi-sratools-bin
+    cmcompare-bin
   ];
 };
 # RNA secondary structure
