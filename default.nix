@@ -24,8 +24,8 @@ dotcoder = self.callPackage ./dotcoder {};
 
 ncbiblast-bin = self.callPackage ./ncbiblast-bin {};
 ncbi-sratools-bin = self.callPackage ./ncbi-sratools-bin {};
-cmcompare-bin = self.callPackage ./cmcompare-bin {};
-cmcompare-varbin = self.callPackage ./cmcompare-varbin {};
+cmcompare-legacy-bin-old = self.callPackage ./cmcompare-legacy-bin-old {};
+cmcompare-legacy-bin = self.callPackage ./cmcompare-legacy-bin {};
 
 # own tools
 
