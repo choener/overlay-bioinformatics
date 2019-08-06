@@ -42,7 +42,7 @@ envGenome = super.pkgs.buildEnv {
     infernal
     ncbiblast-bin
 #    ncbi-sratools-bin
-    cmcompare-bin
+    cmcompare-legacy-bin
   ];
 };
 # RNA secondary structure
