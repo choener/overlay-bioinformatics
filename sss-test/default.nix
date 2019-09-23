@@ -22,7 +22,7 @@ stdenv.mkDerivation rec {
   replaceLocal = ./local.sh;
   nixbundle = ./nix-bundle.sh;
 
-  perl5lib = "${lib.makePerlPath [ perlPackages.StatisticsR perlPackages.BioPerl perlPackages.RegexpCommon perlPackages.IPCRun ]}";
+  perl5lib = "${perlPackages.makePerlPath [ perlPackages.StatisticsR perlPackages.BioPerl perlPackages.RegexpCommon perlPackages.IPCRun ]}";
   prefixpath = "${lib.makeBinPath [ coreutils gnugrep gnused perl rnasnp viennarna muscle R gawk ]}";
 
   installPhase = ''
