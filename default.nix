@@ -15,6 +15,7 @@ locarna = self.callPackage ./locarna {};
 rnasnp = self.callPackage ./rnasnp {};
 viennarna = self.callPackage ./viennarna {};
 dotcoder = self.callPackage ./dotcoder {};
+cmdstannew = self.callPackage ./cmdstan {};
 
 #ncbiblast = self.callPackage ./pkgs/ncbi-blast {};
 #ncbi-sratools = self.callPackage ./pkgs/ncbi-sratools {};
