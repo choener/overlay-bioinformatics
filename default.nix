@@ -16,6 +16,7 @@ rnasnp = self.callPackage ./rnasnp {};
 viennarna = self.callPackage ./viennarna {};
 dotcoder = self.callPackage ./dotcoder {};
 cmdstannew = self.callPackage ./cmdstan {};
+taiyaki = self.callPackage ./taiyaki {};
 
 #ncbiblast = self.callPackage ./pkgs/ncbi-blast {};
 #ncbi-sratools = self.callPackage ./pkgs/ncbi-sratools {};
