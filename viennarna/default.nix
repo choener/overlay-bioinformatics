@@ -1,4 +1,4 @@
-{ stdenv, fetchurl, perl }:
+{ stdenv, fetchurl, perl, lib }:
 # python2, python3  # requires non-standard path, will check later
 
 stdenv.mkDerivation rec {
@@ -13,6 +13,8 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [ perl ]; # python2 python3 ];
 
   enableParallelBuilding = true;
+
+  CFLAGS="-fcommon";
 
   meta = {
     description = "RNA secondary structure prediction";
@@ -33,7 +35,7 @@ stdenv.mkDerivation rec {
     homepage = https://www.tbi.univie.ac.at/RNA/;
     license = "https://www.tbi.univie.ac.at/RNA/ViennaRNA/doc/html/index.html#license";
     maintainers = [  ];
-    platforms = stdenv.lib.platforms.linux;
+    platforms = lib.platforms.linux;
   };
 
 }

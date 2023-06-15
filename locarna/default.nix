@@ -1,4 +1,4 @@
-{ stdenv, fetchurl, pkgconfig, viennarna, gcc, glibc, gcc-unwrapped }:
+{ stdenv, fetchurl, pkgconfig, viennarna, gcc, glibc, gcc-unwrapped, lib }:
 
 stdenv.mkDerivation rec {
   version = "1.9.2.1";
@@ -15,10 +15,12 @@ stdenv.mkDerivation rec {
 
   enableParallelBuilding = true;
 
+  configureFlags = [ "--with-vrna=${viennarna}" ];
+
   postInstall = ''
     for exe in $out/bin/*
     do
-      patchelf --set-rpath "${stdenv.lib.makeLibraryPath buildInputs}:${gcc-unwrapped.lib}/lib:$out/lib" $exe || true
+      patchelf --set-rpath "${lib.makeLibraryPath buildInputs}:${gcc-unwrapped.lib}/lib:$out/lib" $exe || true
     done
   '';
 
@@ -32,9 +34,9 @@ stdenv.mkDerivation rec {
       related RNAs without known common structure.
     '';
     homepage = http://www.bioinf.uni-freiburg.de/Software/LocARNA/;
-    license = stdenv.lib.licenses.gpl3;
+    license = lib.licenses.gpl3;
     maintainers = [  ];
-    platforms = stdenv.lib.platforms.linux;
+    platforms = lib.platforms.linux;
   };
 
 }
