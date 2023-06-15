@@ -1,31 +1,30 @@
 { stdenv, fetchurl, pkgconfig, viennarna, gcc, glibc, gcc-unwrapped, lib }:
 
 stdenv.mkDerivation rec {
-  version = "1.9.2.1";
+  version = "2.0.0";
   name = "locarna-${version}";
 
   src = fetchurl {
     url = "https://github.com/s-will/LocARNA/releases/download/v${version}/locarna-${version}.tar.gz";
-    sha256 = "17k1xlki4jravm6c98vm82klzxhw33fg4ibyh4n4czlsaz0hvqh8";
+    sha256 = "sha256-O+DSysf3RR+LdBmD4igDtUbeIHTYN7Ql+xtpzMcY67w=";
   };
 
-  #PKG_CONFIG_PATH = "${viennarna}/lib/pkgconfig";
+#  PKG_CONFIG_PATH = "${viennarna}/lib/pkgconfig";
 
   buildInputs = [ viennarna ];
-  CFLAGS="-fcommon";
 
-  nativeBuildInputs = [ pkgconfig ];
-
-  #configureFlags = [ "--with-vrna=${viennarna}" ];
+  nativeBuildInputs = [ pkgconfig ]; # gcc-unwrapped.lib ]; # gcc glibc libstdcxx5 ];
 
   enableParallelBuilding = true;
 
-  #postInstall = ''
-  #  for exe in $out/bin/*
-  #  do
-  #    patchelf --set-rpath "${lib.makeLibraryPath buildInputs}:${gcc-unwrapped.lib}/lib:$out/lib" $exe || true
-  #  done
-  #'';
+#  configureFlags = [ "--with-vrna=${viennarna}" ];
+
+  postInstall = ''
+    for exe in $out/bin/*
+    do
+      patchelf --set-rpath "${lib.makeLibraryPath buildInputs}:${gcc-unwrapped.lib}/lib:$out/lib" $exe || true
+    done
+  '';
 
   meta = {
     description = "LocARNA: Alignment of RNAs";
