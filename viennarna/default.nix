@@ -1,16 +1,16 @@
-{ stdenv, fetchurl, perl, lib }:
+{ stdenv, fetchurl, lib, perl, gfortran, lapack, liblapack, pkgconfig }:
 # python2, python3  # requires non-standard path, will check later
 
 stdenv.mkDerivation rec {
-  version = "2.4.6";
+  version = "2.6.1";
   name = "viennarna-${version}";
 
   src = fetchurl {
-    url = "https://www.tbi.univie.ac.at/RNA/download/sourcecode/2_4_x/ViennaRNA-${version}.tar.gz";
-    sha256 = "f6f3241080a733d9f43f5b931b7b4abe327e82dc41bd8256d9fc081e5673c3fb";
+    url = "https://www.tbi.univie.ac.at/RNA/download/sourcecode/2_6_x/ViennaRNA-${version}.tar.gz";
+    sha256 = "sha256-93iHa76ObIVyWmM4GbJkaDB8kZY16Csni6gg7/i633Y=";
   };
 
-  nativeBuildInputs = [ perl ]; # python2 python3 ];
+  nativeBuildInputs = [ perl gfortran lapack liblapack pkgconfig ]; # python2 python3 ];
 
   enableParallelBuilding = true;
 
