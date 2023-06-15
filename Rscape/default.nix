@@ -2,12 +2,17 @@
 
 stdenv.mkDerivation rec {
   version = "2.0.0.q"; # Feb 2023
-  name = "Rscape-${version}";
+  name = "R-scape-${version}";
 
   src = fetchurl {
     url = "http://eddylab.org/software/rscape/rscape.tar.gz";
     sha256 = "sha256-+KADCVOuAo9mJJ0j37jpSHjtwhZB2wEQ8RHB70bdS8k=";
   };
+
+  CFLAGS="-Wno-format-security";
+  CXXFLAGS="-Wno-format-security";
+  configureFlags = [ "--disable-format-security" ];
+  #configurePhase = "./configure --disable-format-security";
 
   enableParallelBuilding = true;
 
