@@ -1,6 +1,8 @@
-{ stdenv, fetchurl, pkgconfig, viennarna, gcc, glibc, gcc-unwrapped, lib }:
+{ stdenv, fetchurl, pkgconfig, viennarna24, gcc, glibc, gcc-unwrapped, lib }: let
 
-stdenv.mkDerivation rec {
+viennarna = viennarna24;
+
+in stdenv.mkDerivation rec {
   version = "1.9.2.1";
   name = "locarna-${version}";
 

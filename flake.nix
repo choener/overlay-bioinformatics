@@ -12,9 +12,10 @@
   outputs = { self, nixpkgs, flake-utils }: let
     overlay = final: prev: {
       Rscape = final.callPackage ./Rscape {};
-      locarna = final.callPackage ./locarna {};
-      locarna2 = final.callPackage ./locarna2 {};
-      viennarna = final.callPackage ./viennarna {};
+      locarna19 = final.callPackage ./locarna/19.nix {};
+      viennarna24 = final.callPackage ./viennarna/24.nix {};
+      viennarna25 = final.callPackage ./viennarna/25.nix {};
+      viennarna26 = final.callPackage ./viennarna/26.nix {};
     };
   in
     flake-utils.lib.eachDefaultSystem (system: let
@@ -25,9 +26,8 @@
       };
       packages = {
         R-scape = pkgs.Rscape;
-        locarna = pkgs.locarna;
-        locarna2 = pkgs.locarna2;
-        viennarna = pkgs.viennarna;
+        inherit (pkgs) viennarna24 viennarna25 viennarna26;
+        inherit (pkgs) locarna19;
       };
     }) // { inherit overlay; };
 }
