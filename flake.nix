@@ -13,6 +13,7 @@
     overlay = final: prev: {
       Rscape = final.callPackage ./Rscape {};
       locarna19 = final.callPackage ./locarna/19.nix {};
+      locarna20 = final.callPackage ./locarna/20.nix {};
       viennarna24 = final.callPackage ./viennarna/24.nix {};
       viennarna25 = final.callPackage ./viennarna/25.nix {};
       viennarna26 = final.callPackage ./viennarna/26.nix {};
@@ -27,7 +28,7 @@
       packages = {
         R-scape = pkgs.Rscape;
         inherit (pkgs) viennarna24 viennarna25 viennarna26;
-        inherit (pkgs) locarna19;
+        inherit (pkgs) locarna19 locarna20;
       };
     }) // { inherit overlay; };
 }
